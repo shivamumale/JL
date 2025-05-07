@@ -1,0 +1,69 @@
+CalculatorServlet.java 
+import java.io.*; 
+import jakarta.servlet.*; 
+import jakarta.servlet.http.*; 
+public class CalculatorServlet extends HttpServlet { 
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, 
+IOException { 
+        response.setContentType("text/html"); 
+        PrintWriter out = response.getWriter(); 
+        // Get parameters from form 
+        int num1 = Integer.parseInt(request.getParameter("num1")); 
+        int num2 = Integer.parseInt(request.getParameter("num2")); 
+        String op = request.getParameter("operation"); 
+        double result = 0; 
+        switch (op) { 
+            case "add": result = num1 + num2; break; 
+            case "sub": result = num1 - num2; break; 
+            case "mul": result = num1 * num2; break; 
+            case "div":  
+                if (num2 != 0) 
+                    result = (double) num1 / num2; 
+                else 
+                    out.println("<h3>Division by zero error!</h3>"); 
+                break; 
+            default: 
+                out.println("<h3>Invalid Operation</h3>"); 
+                return; 
+        } 
+        out.println("<h2>Result: " + result + "</h2>"); 
+    }} 
+calculator.html 
+<!DOCTYPE html> 
+<html> 
+<head><title>Simple Calculator</title></head> 
+<body> 
+    <h2>Simple Calculator</h2> 
+    <form action="CalculatorServlet" method="post"> 
+        Number 1: <input type="text" name="num1"><br><br> 
+        Number 2: <input type="text" name="num2"><br><br> 
+        Operation:<br> 
+        <input type="radio" name="operation" value="add" checked> Addition<br> 
+        <input type="radio" name="operation" value="sub"> Subtraction<br> 
+        <input type="radio" name="operation" value="mul"> Multiplication<br> 
+        <input type="radio" name="operation" value="div"> Division<br><br> 
+        <input type="submit" value="Calculate"> 
+    </form> 
+</body> 
+</html>  
+ 
+ 
+Web.xml 
+<?xml version="1.0" encoding="UTF-8"?> 
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"  
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee  
+                             http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0"> 
+    <display-name>SimpleCalculatorApp</display-name> 
+    <servlet> 
+        <servlet-name>CalculatorServlet</servlet-name> 
+        <servlet-class>CalculatorServlet</servlet-class> 
+    </servlet> 
+    <servlet-mapping> 
+        <servlet-name>CalculatorServlet</servlet-name> 
+        <url-pattern>/CalculatorServlet</url-pattern> 
+    </servlet-mapping> 
+    <welcome-file-list> 
+        <welcome-file>calculator.html</welcome-file> 
+    </welcome-file-list> 
+</web-app> 
