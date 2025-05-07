@@ -1,0 +1,34 @@
+KeyEventDemo.java 
+import java.awt.*; 
+import java.applet.*; 
+import java.awt.event.*; 
+public class KeyEventDemo extends Applet implements KeyListener { 
+    String msg = "Assign1: A JAVA program to demo status of key"; 
+    public void init() { 
+        addKeyListener(this); 
+        setFocusable(true); // Important to ensure key events are received 
+} 
+    public void keyPressed(KeyEvent k) { 
+        showStatus("Key Pressed"); 
+        repaint(); 
+    } 
+    public void keyReleased(KeyEvent k) { 
+        showStatus("Key Released"); 
+        repaint(); 
+    } 
+    public void keyTyped(KeyEvent k) { 
+        showStatus("Key Typed"); 
+        repaint(); 
+    } 
+    public void paint(Graphics g) { 
+        g.drawString(msg, 10, 20); 
+    } 
+} 
+ 
+Index.html 
+<html> 
+    <body> 
+        <applet code="KeyEventDemo.class" width="400" height="100"> 
+        </applet> 
+    </body> 
+</html>
