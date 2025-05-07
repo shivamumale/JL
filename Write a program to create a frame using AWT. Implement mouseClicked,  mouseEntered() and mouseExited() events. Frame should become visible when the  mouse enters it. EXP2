@@ -1,0 +1,36 @@
+Exp2.java 
+import java.awt.*; 
+import java.awt.event.*; 
+class Exp2 extends Frame implements MouseListener { 
+    Exp2() { 
+        setTitle("Mouse Event Frame"); 
+        setSize(400, 300); 
+        setLayout(new FlowLayout()); 
+        add(new Label("Mouse Events: Enter, Exit, Click")); 
+        addMouseListener(this); 
+        setVisible(false); // Frame hidden initially 
+    } 
+    public void mouseEntered(MouseEvent e) { 
+        System.out.println("Mouse Entered"); 
+        setVisible(true); 
+    } 
+    public void mouseExited(MouseEvent e) { 
+        System.out.println("Mouse Exited"); 
+        setVisible(false); 
+    } 
+    public void mouseClicked(MouseEvent e) { 
+        System.out.println("Mouse Clicked"); 
+    } 
+    public void mousePressed(MouseEvent e) {} 
+    public void mouseReleased(MouseEvent e) {} 
+    public static void main(String[] args) { 
+        Frame baseFrame = new Frame("Trigger Area"); 
+        baseFrame.setSize(300, 200); 
+        baseFrame.setLayout(new FlowLayout()); 
+        baseFrame.add(new Label("Move mouse here to show the frame")); 
+        baseFrame.setVisible(true); 
+        Exp2 mouseFrame = new Exp2(); 
+        baseFrame.addMouseListener(new MouseAdapter() { 
+            public void mouseEntered(MouseEvent e) { 
+                mouseFrame.setVisible(true); 
+            }  });  }  } 
