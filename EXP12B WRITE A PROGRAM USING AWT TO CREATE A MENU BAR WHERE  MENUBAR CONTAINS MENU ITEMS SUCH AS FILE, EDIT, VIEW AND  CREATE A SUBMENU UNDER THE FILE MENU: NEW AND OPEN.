@@ -1,0 +1,21 @@
+import java.awt.*; 
+public class Exp12b { 
+    public static void main(String args[]) { 
+        Frame f = new Frame("BorderLayout Demo"); 
+        f.setSize(400, 400); 
+        f.setLayout(new BorderLayout()); 
+        // Creating buttons 
+        Button northButton = new Button("North"); 
+        Button southButton = new Button("South"); 
+        Button eastButton = new Button("East"); 
+        Button westButton = new Button("West"); 
+        Button centerButton = new Button("Center"); 
+        // Adding buttons to specific regions 
+        f.add(northButton, BorderLayout.NORTH); 
+        f.add(southButton, BorderLayout.SOUTH); 
+        f.add(eastButton, BorderLayout.EAST); 
+        f.add(westButton, BorderLayout.WEST); 
+        f.add(centerButton, BorderLayout.CENTER); 
+        f.setVisible(true); 
+    } 
+} 
